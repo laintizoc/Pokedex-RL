@@ -11,12 +11,12 @@ import { signIn, signOut } from 'next-auth/react'
 // 		)
 // 	}
 // 	return (
-// 		<button type="button" onClick={()=>signIn('google')}>Sign In</button>
+// 		<button type="button" onClick={()=>signIn('nextcloud')}>Sign In</button>
 // 	)
 // }
 
 export default function SignButton() {
 	return (
-	<button type="button" onClick={()=>signIn('google')}>Sign In</button>
+	<button type="button" onClick={()=>signIn('nextcloud')}>Sign In</button>
   )
 }
