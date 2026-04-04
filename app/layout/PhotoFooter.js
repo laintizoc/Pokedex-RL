@@ -13,7 +13,7 @@ export default observer(({ takeScreenshot }) => {
 				<footer id="footer" className="flex photo-footer">
 				<NavItem  href="/">
 					<IconBack />
-					Back
+					Zurück
 				</NavItem>
 				<div 
 					className={`menu-item flex-1 flex justify-center cursor-pointer camera-button ${store.picture.buttonPressed && 'buttonPressed'} ${store.picture.loadingContent && 'loadingContent'}`}

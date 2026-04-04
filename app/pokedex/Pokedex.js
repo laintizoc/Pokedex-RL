@@ -15,8 +15,8 @@ const Pokedex = observer(() => {
       {store.pokemon.length === 0 && 
       <div className="text-center p-4">
          <img src="/dragon.svg" width="100" className="mx-auto mb-4 grayscale opacity-50" />
-         <h2 className="text-3xl mb-2">No Pokemon Found</h2>
-         <p>Try taking some photos of pokemon on the Camera Page</p>
+         <h2 className="text-3xl mb-2">Keine Pokémon gefunden</h2>
+         <p>Fotografiere Objekte mit der Kamera</p>
       </div>
       }
 		</div>
@@ -68,7 +68,7 @@ const Searchbar = observer(() => {
   return (
     <div className="mt-12 p-4">
           <form className="flex items-center">   
-            <label htmlFor="simple-search" className="sr-only">Search</label>
+            <label htmlFor="simple-search" className="sr-only">Suche</label>
             <div className="relative w-full">
                 <div className="absolute inset-y-0 start-0 flex items-center ps-4 pointer-events-none">
                   <svg className="w-6 h-6 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -79,7 +79,7 @@ const Searchbar = observer(() => {
                   type="text" 
                   onChange={(e) => store.keyword = e.target.value}
                   value={store.keyword}
-                  id="simple-search" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full ps-12 p-4  text-lg" placeholder="Search..." required />
+                  id="simple-search" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full ps-12 p-4  text-lg" placeholder="Suche..." required />
             </div>
         </form>
       </div>

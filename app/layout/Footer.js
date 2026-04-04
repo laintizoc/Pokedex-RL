@@ -8,11 +8,11 @@ export default () => <>
 <footer id="footer" className="flex">
 <NavItem href="/camera">
   <IconCamera />
-  Camera
+  Kamera
 </NavItem>
 <NavItem  href="/pokedex">
   <IconPoke />
-  Pokedex
+  Pokédex
 </NavItem>
 
 <Link href="/camera" className="menu-item flex-1 flex justify-center ">
@@ -20,11 +20,11 @@ export default () => <>
 </Link>
 <NavItem  href="/leaderboard">
   <IconLeader />
-  Leaderboard
+  Rangliste
 </NavItem>
 <NavItem  href="/profile">
   <IconUser />
-  Profile
+  Profil
 </NavItem>
 
 {/* <NavItem>

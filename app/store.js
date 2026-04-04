@@ -161,7 +161,7 @@ class appStore {
 			...data.entry, 
 			image: this.capture.image 
 		}
-		if(this.capture.description == "No object identified." || this.capture.description == "No object detected."){
+		if(this.capture.description == "No object identified." || this.capture.description == "No object detected." || this.capture.description == "Kein Objekt erkannt."){
 			// Do not add to pokemon list
 		} else {
 			this.pokemon.push(this.capture)

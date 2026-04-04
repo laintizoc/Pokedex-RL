@@ -91,17 +91,17 @@ const Camera = observer(() => {
         <div className="capture-processing">
           <div className="mt-4 bouncing-loader"><div /><div /><div /></div>
           <span>
-            <div className="desc processing">Processing</div>
+            <div className="desc processing">Wird verarbeitet</div>
           </span>
         </div>
         :
 
         <div className="capture-anything">
           <div className="title">
-            Camera
+            Kamera
           </div>
           <div className="desc capturing">
-            Capture a photo of anything
+            Fotografiere ein beliebiges Objekt
           </div>
         </div>
         }

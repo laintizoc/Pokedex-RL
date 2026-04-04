@@ -40,7 +40,7 @@ const Leaderboard = observer(() => {
                     Name
                 </th>
                 <th scope="col" className="px-3 py-3">
-                    Entries
+                    Einträge
                 </th>
             </tr>
         </thead>
@@ -63,7 +63,7 @@ const Leaderboard = observer(() => {
     {store.leaderboardRefresh ? 
           <div className="text-center mt-4 pt-4 text-gray-400">
               <div className="mt-4 bouncing-loader "><div /><div /><div /></div>
-              <div className="mt-4">Refreshing</div>
+              <div className="mt-4">Wird aktualisiert</div>
             </div>
         : <div >
           

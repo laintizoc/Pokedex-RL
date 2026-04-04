@@ -10,27 +10,25 @@ const Pokedex = observer(() => {
     <>
       <Header />
       <>
-      <h1>Pokedex</h1>
+      <h1>Pokédex</h1>
           {store.capture.image}
           <input type="file" onChange={store.handleCaptureImage} />
-          <button onClick={store.fetchVoice} className="p-2 bg-gray-200 rounded">Submit</button>
+          <button onClick={store.fetchVoice} className="p-2 bg-gray-200 rounded">Absenden</button>
           {store.capture.image && 
             <img src={store.capture.image} className="rounded-lg max-h-[200px]" />}
             {store.capture.voiceUrl && 
               <audio src={store.capture.voiceUrl} controls autoPlay playsInline />}
-            <div>Voice Token: {store.capture.voiceJobToken}</div>
-            <div>Voice Status: {store.capture.voiceStatus}</div>
-            <div>Voice URL: {store.capture.voiceUrl}</div>
+            <div>Stimme URL: {store.capture.voiceUrl}</div>
             <div>Name: {store.capture.object}</div>
-            <div>Species: {store.capture.species}</div>
-            <div>Weight: {store.capture.weight}</div>
-            <div>Height: {store.capture.height}</div>
-            <div>HP: {store.capture.hp}</div>
-            <div>Attack: {store.capture.attack}</div>
-            <div>Defense: {store.capture.defense}</div>
-            <div>Speed: {store.capture.speed}</div>
-            <div>Type: {store.capture.type}</div>
-            <div>Description: {store.capture.description}</div>
+            <div>Spezies: {store.capture.species}</div>
+            <div>Gewicht: {store.capture.weight}</div>
+            <div>Größe: {store.capture.height}</div>
+            <div>KP: {store.capture.hp}</div>
+            <div>Angriff: {store.capture.attack}</div>
+            <div>Verteidigung: {store.capture.defense}</div>
+            <div>Tempo: {store.capture.speed}</div>
+            <div>Typ: {store.capture.type}</div>
+            <div>Beschreibung: {store.capture.description}</div>
         </>
       <Footer />
     </>

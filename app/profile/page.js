@@ -17,7 +17,7 @@ const Profile = observer(() => {
           <div className="flex flex-col items-center">
             <img
               src={store.profile.avatar}
-              alt="profile"
+              alt="Profil"
               className="rounded-full h-48 w-48 mb-4"
             />
             <h1 className="text-3xl">{store.profile.name}</h1>
@@ -31,7 +31,7 @@ const Profile = observer(() => {
               }}
               className="bg-red-500 text-white px-4 py-2 rounded mt-4"
             >
-              Sign Out
+              Abmelden
             </button>
           </div>
 

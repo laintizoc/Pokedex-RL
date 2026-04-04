@@ -82,7 +82,7 @@ const Pokedex = observer(() => {
 				<circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
 				<path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
 				</svg>
-				Processing Audio...
+				Audio wird verarbeitet...
 			</button>
 			</div>}
 			
@@ -95,37 +95,37 @@ const Pokedex = observer(() => {
 		  	<div className="stats divide-y">
 			  <div className="stat p-2">
 		  			<div className="stat-icon w-8"><IconSpecies /></div>
-					<div className="stat-attr w-24">Species</div>
+					<div className="stat-attr w-24">Spezies</div>
 					<div className="stat-value">{store.capture.species}</div>
 				</div>
 			  	<div className="stat p-2">
 		  			<div className="stat-icon w-8"><IconWeight /></div>
-					<div className="stat-attr w-24">Weight</div>
+					<div className="stat-attr w-24">Gewicht</div>
 					<div className="stat-value">{store.capture.approximateWeight}</div>
 				</div>
 				<div className="stat p-2">
 		  			<div className="stat-icon w-8"><IconHeight /></div>
-					<div className="stat-attr w-24">Height</div>
+					<div className="stat-attr w-24">Größe</div>
 					<div className="stat-value ">{store.capture.approximateHeight}</div>
 				</div>
 				<div className="stat p-2">
 		  			<div className="stat-icon w-8"><IconSpeed /></div>
-					<div className="stat-attr w-24">Speed</div>
+					<div className="stat-attr w-24">Tempo</div>
 					<div className="stat-value">{store.capture.speed}</div>
 				</div>
 				<div className="stat p-2">
 		  			<div className="stat-icon w-8"><IconHP /></div>
-					<div className="stat-attr w-24">HP</div>
+					<div className="stat-attr w-24">KP</div>
 					<div className="stat-value">{store.capture.hp}</div>
 				</div>
 				<div className="stat p-2">
 		  			<div className="stat-icon w-8"><IconAttack /></div>
-					<div className="stat-attr w-24">Attack</div>
+					<div className="stat-attr w-24">Angriff</div>
 					<div className="stat-value ">{store.capture.attack}</div>
 				</div>
 				<div className="stat p-2">
 		  			<div className="stat-icon w-8"><IconDefense /></div>
-					<div className="stat-attr w-24">Defense</div>
+					<div className="stat-attr w-24">Verteidigung</div>
 					<div className="stat-value">{store.capture.defense}</div>
 				</div>
 			</div>
@@ -144,12 +144,12 @@ const Pokedex = observer(() => {
 				data={{
 					label: '',
 					labels: [
-						'HP', 
-						'Attack', 
-						'Defense',
-						'Speed',
-						'Height',
-						'Weight',
+						'KP',
+						'Angriff',
+						'Verteidigung',
+						'Tempo',
+						'Größe',
+						'Gewicht',
 					],
 					datasets: [{
 						label: '',
