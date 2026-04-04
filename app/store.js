@@ -21,9 +21,6 @@ const CAPTURE_SCHEMA = {
 	"speed": 0,
 	"type": "",
 	"description": "",
-	voiceJobToken: "",
-	voicePath: "",
-	voiceStatus: "",
 	voiceUrl: "",
 }
 
@@ -175,26 +172,17 @@ class appStore {
 		// this.pollFetchVoice();
 	} 
 
-	pollingVoice;
-
 	fetchVoice = async () => {
-		// If no description, why bother?
-		if(!store.capture.description){
-			return false
-		}
-		// If voiceUrl already exists, no point to catch it.
-		if(store.capture.voiceUrl){
+		if(!store.capture.description || store.capture.voiceUrl){
 			return false
 		}
 		const bodyData = {
 			capture: {
 				_id: store.capture._id,
-				inference_job_token: store.capture.inference_job_token,
 				description: store.capture.description,
 				voiceUrl: store.capture.voiceUrl,
 			}
 		}
-		console.log(`00 send to voice api`, bodyData)
 		const response = await fetch("/api/voice", {
 			method: "POST",
 			headers: {
@@ -204,15 +192,13 @@ class appStore {
 			body: JSON.stringify(bodyData),
 		});
 		const data = await response.json();
-		this.capture = { 
-			...this.capture, 
-			...data.capture 
+		this.capture = {
+			...this.capture,
+			...data.capture
 		}
-		const index = this.pokemon.findIndex(poke => poke._id.$uuid == this.capture._id.$uuid)
-		this.pokemon[index] = { ...this.capture }
-		// wait about 5 seconds, then run this function again if the voiceStatus is not "complete_success". 
-		if(this.capture.voiceStatus != "complete_success"){
-			this.pollingVoice = setTimeout(this.fetchVoice, 5000);
+		const index = this.pokemon.findIndex(poke => poke._id == this.capture._id)
+		if(index >= 0){
+			this.pokemon[index] = { ...this.capture }
 		}
 	}
 

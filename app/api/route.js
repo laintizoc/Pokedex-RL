@@ -3,7 +3,6 @@ export const dynamic = 'force-dynamic';
 
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
-import { v4 as uuidv4 } from 'uuid';
 import db from '@/app/db'
 import { getToken } from 'next-auth/jwt';
 
@@ -38,14 +37,14 @@ export async function POST(req) {
 			status: 200
 		});
 	}
-	let inference_job_token = await generateVoice(imageDescription)
+	let voiceUrl = await generateVoice(imageDescription)
 	let entry = await generateEntry(imageDescription);
 	let vector = await getEmbedding(imageDescription);
 	let no = await getNoObject();
 
 	entry.embedding = vector;
-	if(inference_job_token){
-		entry.inference_job_token = inference_job_token;
+	if(voiceUrl){
+		entry.voiceUrl = voiceUrl;
 	}
 	entry.image = imageUrl
 	entry.no = no;
@@ -148,22 +147,38 @@ const addToDatabase = async (req, entry) => {
 }
 
 const generateVoice = async (description) => {
-
-	let headers = getHeaders();
-	const voice = await fetch('https://api.fakeyou.com/tts/inference', {
-		method: 'POST',
-		headers,
-		body: JSON.stringify({
-			tts_model_token: 'weight_dh8zry5bgkfm0z6nv3anqa9y5',
-			uuid_idempotency_token: uuidv4(),
-			inference_text: description, //description
-		})
-	})
-	.then(res => res.json())
-	.catch(err =>{
-		console.log(err)
-	});
-	return voice.inference_job_token
+	try {
+		const response = await fetch(
+			`https://api.elevenlabs.io/v1/text-to-speech/${process.env.ELEVENLABS_VOICE_ID}`,
+			{
+				method: 'POST',
+				headers: {
+					'xi-api-key': process.env.ELEVENLABS_API_KEY,
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					text: description,
+					model_id: 'eleven_multilingual_v2',
+				}),
+			}
+		);
+		if (!response.ok) {
+			console.log('ElevenLabs TTS error:', response.status);
+			return null;
+		}
+		const audioBuffer = Buffer.from(await response.arrayBuffer());
+		const fileName = `voice_${crypto.randomUUID()}.mp3`;
+		const fs = await import('fs/promises');
+		const path = await import('path');
+		const uploadsDir = path.join(process.cwd(), 'public', 'uploads', 'voice');
+		await fs.mkdir(uploadsDir, { recursive: true });
+		const filePath = path.join(uploadsDir, fileName);
+		await fs.writeFile(filePath, audioBuffer);
+		return `/uploads/voice/${fileName}`;
+	} catch (err) {
+		console.log('ElevenLabs TTS error:', err);
+		return null;
+	}
 }
 
 const getEmbedding = async (text) => {
@@ -197,16 +212,6 @@ const analysisImage = async (image) => {
 	});
 
 	return completion.choices[0].message.content
-}
-
-const getHeaders = () => {
-	const headers = new Headers();
-	const cookie = process.env.FAKEYOU_COOKIE;
-
-	headers.append("content-type", "application/json");
-	headers.append("credentials", "include");
-	headers.append("cookie", `session=${cookie}`);
-	return headers
 }
 
 const saveImageLocally = async (base64Image) => {

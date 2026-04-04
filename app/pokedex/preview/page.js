@@ -36,11 +36,7 @@ const Pokedex = observer(() => {
 		initialized.current = true
 		store.fetchVoice();
 	}
-	return () => {
-		// if(store.pollingVoice){
-			clearInterval(store.pollingVoice)
-		// }
-	}
+	return () => {}
   }, []);
 
   const type = store.capture.type.toLowerCase();
