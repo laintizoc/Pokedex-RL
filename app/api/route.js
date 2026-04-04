@@ -5,22 +5,15 @@ import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import { v4 as uuidv4 } from 'uuid';
 import db from '@/app/db'
-import {v2 as cloudinary} from 'cloudinary';
 import { getToken } from 'next-auth/jwt';
 
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
-
-cloudinary.config({ 
-  cloud_name: process.env.CLOUDINARY_NAME, 
-  api_key: process.env.CLOUDINARY_KEY, 
-  api_secret: process.env.CLOUDINARY_SECRET 
-});
 
 export async function POST(req) {
 
 	let { capture } = await req.json();
 
-	let image = await cloudinary.uploader.upload(capture.image);
+	let imageUrl = await saveImageLocally(capture.image);
 	let imageDescription = await analysisImage(capture.image);
 
 	if(imageDescription === "No object identified.") {
@@ -54,7 +47,7 @@ export async function POST(req) {
 	if(inference_job_token){
 		entry.inference_job_token = inference_job_token;
 	}
-	entry.image = image.secure_url
+	entry.image = imageUrl
 	entry.no = no;
 
 	let poke = await addToDatabase(req, entry);
@@ -214,5 +207,23 @@ const getHeaders = () => {
 	headers.append("credentials", "include");
 	headers.append("cookie", `session=${cookie}`);
 	return headers
+}
+
+const saveImageLocally = async (base64Image) => {
+	const fs = await import('fs/promises');
+	const path = await import('path');
+
+	const matches = base64Image.match(/^data:image\/(\w+);base64,(.+)$/);
+	const ext = matches ? matches[1] : 'jpg';
+	const data = matches ? matches[2] : base64Image;
+	const buffer = Buffer.from(data, 'base64');
+
+	const fileName = `${crypto.randomUUID()}.${ext}`;
+	const uploadsDir = path.join(process.cwd(), 'public', 'uploads', 'images');
+	await fs.mkdir(uploadsDir, { recursive: true });
+	const filePath = path.join(uploadsDir, fileName);
+	await fs.writeFile(filePath, buffer);
+
+	return `/uploads/images/${fileName}`;
 }
 

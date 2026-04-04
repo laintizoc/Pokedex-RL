@@ -13,7 +13,6 @@
     "@imgly/background-removal": "^1.4.5",
     "@vercel/analytics": "^1.2.2",
     "chart.js": "^4.4.2",
-    "cloudinary": "^2.2.0",
     "fakeyou.js": "^1.1.1",
     "mobx": "^6.12.3",
     "mobx-react": "^9.1.1",

@@ -28,6 +28,12 @@ yarn-error.log*
 # local env files
 .env*.local
 
+# uploaded files (keep .gitkeep)
+public/uploads/images/*
+!public/uploads/images/.gitkeep
+public/uploads/voice/*
+!public/uploads/voice/.gitkeep
+
 # vercel
 .vercel
 
