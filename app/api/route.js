@@ -5,7 +5,6 @@ import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import { v4 as uuidv4 } from 'uuid';
 import db from '@/app/db'
-import { UUID, ObjectId } from '@datastax/astra-db-ts';
 import {v2 as cloudinary} from 'cloudinary';
 import { getToken } from 'next-auth/jwt';
 
@@ -51,7 +50,7 @@ export async function POST(req) {
 	let vector = await getEmbedding(imageDescription);
 	let no = await getNoObject();
 
-	entry.$vector = vector;
+	entry.embedding = vector;
 	if(inference_job_token){
 		entry.inference_job_token = inference_job_token;
 	}
@@ -84,7 +83,7 @@ const generateEntry = async (imageDescription) => {
 	  });
 	let entry = JSON.parse(completion.choices[0].message.content)
 	entry.description = imageDescription;
-	entry._id = UUID.v4();
+	entry._id = crypto.randomUUID();
 	return entry
 }
 

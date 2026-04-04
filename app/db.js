@@ -1,5 +1,5 @@
-import { DataAPIClient } from '@datastax/astra-db-ts';
-const client = new DataAPIClient(process.env.ASTRA_DB_APPLICATION_TOKEN);
-const db = client.db('https://8ce1a9d9-fb59-4236-9d4c-451485cff59b-us-east-2.apps.astra.datastax.com');
+import { MongoClient } from 'mongodb';
+const client = new MongoClient(process.env.MONGODB_URI);
+const db = client.db(process.env.MONGODB_DB_NAME || 'pokedex');
 
 export default db;

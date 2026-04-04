@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { DataAPIClient } from "@datastax/astra-db-ts";
 import { getToken } from 'next-auth/jwt';
 import db from "@/app/db";
 
@@ -22,8 +21,8 @@ export async function GET(req) {
 				limit: 999,
 				sort : { no: 1 },
 				// dont select vector field
-				projection: { 
-					$vector: 0
+				projection: {
+					embedding: 0
 				}
 			}).toArray();
 			return NextResponse.json({
