@@ -1,8 +1,5 @@
 import { NextResponse } from "next/server";
-import OpenAI from "openai";
 import db from '@/app/db';
-
-const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
 export async function GET(req) {
 
