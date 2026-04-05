@@ -33,9 +33,6 @@ const Page = observer(() => {
           <img src={LoginImage.src} width="320" className="mt-24" />
           <div>
             <img src={ButtonLogin.src} width="320" className="cursor-pointer" onClick={()=>signIn('nextcloud')} />
-            <Link href="/camera">
-              <img src={ButtonScan.src} width="320" />
-            </Link>
           </div>
       </div>
     </>
