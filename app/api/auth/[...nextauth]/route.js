@@ -6,14 +6,23 @@ const authOptions = {
 		{
 			id: "nextcloud",
 			name: "Nextcloud",
-			type: "oidc",
-			issuer: process.env.NEXTCLOUD_ISSUER,
+			type: "oauth",
 			clientId: process.env.NEXTCLOUD_CLIENT_ID ?? "",
 			clientSecret: process.env.NEXTCLOUD_CLIENT_SECRET ?? "",
+			wellKnown: `${process.env.NEXTCLOUD_ISSUER}/.well-known/openid-configuration`,
 			authorization: {
 				params: {
 					scope: "openid email profile",
 				},
+			},
+			idToken: true,
+			profile(profile) {
+				return {
+					id: profile.sub,
+					name: profile.name || profile.preferred_username,
+					email: profile.email,
+					image: profile.picture || null,
+				}
 			},
 		},
 	],

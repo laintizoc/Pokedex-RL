@@ -1,36 +1,58 @@
-Due to AI pricing requirements, I am unable to host this project indefinitely. You can clone the project here on github. Preview [full demo video here](https://youtu.be/NBmLFMN0fdw).
+# Pokédex for Real Life
+
+Ein Pokédex für das echte Leben – scanne Objekte mit deiner Kamera und erhalte Pokédex-Einträge mit Stats und Fun Facts.
+
+Basiert auf dem Projekt von [Adrian Twarog](https://www.youtube.com/@AdrianTwarog) ([Original-Repo](https://github.com/adriantwarog/Pokedex-RL)).
 
 ![Pokedex for Real Life](preview.gif)
 
-## Getting Started
+## Tech Stack
 
-This project is built on top of Next JS, you can clone your own instance and perform the following configuration to get it up and running.
+- **Frontend/Backend:** Next.js 14
+- **KI:** Google Gemini (Bilderkennung + Textgenerierung)
+- **Sprache:** ElevenLabs (Text-to-Speech)
+- **Datenbank:** MongoDB
+- **Auth:** Nextcloud OIDC
 
-1. Configure the .env file with details on (API Keys):
-- [Astra DB](#) - Database on DataStax
-- [OpenAI](#) - OpenAI model
-- [Cloudinary](#) - Image model
-- [Fakeyou](#) - Voice generation model
-- [Google](#) - Authentication for Next JS
-- [Next JS](#)  - Frontend and Backend
+## Setup
 
-2. First, run the development server:
+### Voraussetzungen
+
+- Node.js 18+ oder Docker
+- MongoDB-Instanz
+- API-Keys (siehe `.env.example`)
+
+### Mit Docker
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-bun dev
+cp .env.example .env
+# .env ausfüllen (MONGODB_URI=mongodb://mongo:27017)
+docker compose up --build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Ohne Docker
 
-## Learn More
+```bash
+cp .env.example .env
+# .env ausfüllen
+npm install
+npm run dev
+```
 
-You can learn about the video at the youtube channel 
+App läuft auf [http://localhost:3000](http://localhost:3000).
 
-- [Adrian Twarog](https://www.youtube.com/@AdrianTwarog) - YouTube Channel
-- [I made a Pokedex for Real Life](https://www.youtube.com/@AdrianTwarog) - Pokedex RL
+## Umgebungsvariablen
 
-You are welcome to clone or fork this project! I hope you enjoy it and it becomes something of a project for learning and showcasing what can be done when connecting AI models and tools!
+Siehe `.env.example` für alle benötigten Variablen:
+
+| Variable | Beschreibung |
+|---|---|
+| `GEMINI_API_KEY` | Google Gemini API Key |
+| `MONGODB_URI` | MongoDB Connection String |
+| `ELEVENLABS_API_KEY` | ElevenLabs TTS API Key |
+| `ELEVENLABS_VOICE_ID` | ElevenLabs Voice ID |
+| `NEXTCLOUD_ISSUER` | Nextcloud OIDC Issuer URL |
+| `NEXTCLOUD_CLIENT_ID` | Nextcloud OAuth Client ID |
+| `NEXTCLOUD_CLIENT_SECRET` | Nextcloud OAuth Client Secret |
+| `NEXTAUTH_SECRET` | NextAuth Session Secret |
+| `NEXTAUTH_URL` | App URL (z.B. http://localhost:3000) |
