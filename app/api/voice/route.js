@@ -58,7 +58,7 @@ const generateVoice = async (description) => {
 				},
 				body: JSON.stringify({
 					text: description,
-					model_id: 'eleven_multilingual_v2',
+					model_id: 'eleven_flash_v2_5',
 				}),
 			}
 		);
